@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/web/include.js?v=1.0.5"></script>
+    <script src="../js/web/include.js?v=1.0.5"></script>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content" id="app">
@@ -47,14 +47,15 @@
             el: "#app",
             data: {
                 status: -1,
-                index:0
+                index:0,
+                showLayerButton:true,//控制弹出层的按钮{保存，关闭}
             },
             methods: {
                 recover: function (val) {
                     setStatus(this,val)
                 },
                 modify: function (flag) {
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "add${classdef}.html?";
                     if(flag==0){//新增
                         url+= "id=0";
                     }else{//修改
@@ -65,7 +66,7 @@
                     modifyShow(this,url,"80%","80%","${classdef}");
                 },
                  view:function(row, tr, field){//慧姐提供
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "add${classdef}.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
                     modifyShow(this,url,"80%","80%","${classdef}");
@@ -91,23 +92,15 @@
                         field: 'state',
                         checkbox:true
                     },
-                    {
-                        title: '编号',
+                    <#list fieldList as field>
+			        <#if field.nullAble == false>
+			        {
+                        title: '${field.comment}',
                         align: 'center',
-                        field: 'iD',
+                        field: '${field.xame}',
                     },
-                    {
-                        title: '创建时间',
-                        align: 'center',
-                        field: 'createTime',
-                        formatter: timeFormatter19
-                    },
-                    {
-                        title: '修改时间',
-                        align: 'center',
-                        field: 'modifyTime',
-                        formatter: timeFormatter19
-                    },
+			        </#if>
+			        </#list>
                     {
                         title: getChangHead("类型","status",[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]),
                         align: 'center',

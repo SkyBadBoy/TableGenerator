@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/web/include.js?v=1.0.5"></script>
+    <script src="../js/web/include.js?v=1.0.5"></script>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content" id="app">
@@ -55,7 +55,7 @@
                     setStatus(this,val)
                 },
                 modify: function (flag) {
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "add${classdef}.html?";
                     if(flag==0){//新增
                         url+= "id=0";
                     }else{//修改
@@ -66,7 +66,7 @@
                     modifyShow(this,url,"80%","80%","${classdef}");
                 },
                  view:function(row, tr, field){//慧姐提供
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "add${classdef}.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
                     modifyShow(this,url,"80%","80%","${classdef}");
@@ -81,7 +81,7 @@
         })
         /** 固定写法 by majian*/
         function setStatus(that,status) {
-            setAdminStatus(that,status,"../${classdef}/set${classdef}Status")
+            setAdminStatus(that,status,basePath+"${classdef}/set${classdef}Status")
         }
         /** 初始化表格*/
         (function(document, window, $) {
@@ -95,9 +95,9 @@
                     <#list fieldList as field>
 			        <#if field.nullAble == false>
 			        {
-                        title: '${field.xame}',
+                        title: '${field.comment}',
                         align: 'center',
-                        field: '${field.comment}',
+                        field: '${field.xame}',
                     },
 			        </#if>
 			        </#list>
@@ -110,7 +110,7 @@
                         }
                     },
                 ];
-                getDataTable($('#exampleTableEvents'),"../${classdef}/query${classdef}Page",columns,queryParams,true,tempApp);
+                getDataTable($('#exampleTableEvents'),basePath+"${classdef}/query${classdef}Page",columns,queryParams,true,tempApp);
             })();
             function queryParams(params) {
                 var temp={}
