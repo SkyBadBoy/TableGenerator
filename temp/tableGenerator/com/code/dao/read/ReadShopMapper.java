@@ -2,7 +2,7 @@
 package com.code.dao.read;
 import java.util.*;
 import com.code.config.mybatis.ReadMapper;
-import com.code.domain.Check;
+import com.code.domain.Shop;
 import java.util.List;
 
 /**
@@ -11,6 +11,6 @@ import java.util.List;
  * @author majian
  * 
  */
-public interface ReadCheckMapper extends ReadMapper<Check>{
+public interface ReadShopMapper extends ReadMapper<Shop>{
 
 }

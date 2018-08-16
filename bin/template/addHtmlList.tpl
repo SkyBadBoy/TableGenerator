@@ -46,10 +46,10 @@
         var app = new Vue({
             el: "#app",
             data: {
-                 viewflag:getUrlKey("viewflag")=="1"?false:true,//查看标志
-                 <#list xName as field>
-                    ${field.xame}:"${field.comment}",
-                 </#list>
+                 viewflag:getUrlKey("viewflag")=="1"?true:false,//查看标志
+             <#list xName as field>
+                 ${field.xame}:"${field.comment}",
+             </#list>
                 data:{
                     iD:getUrlKey("id"),
                     <#list xName as field>

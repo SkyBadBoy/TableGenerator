@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/web/include.js?v=1.0.5"></script>
+    <script src="../js/web/include.js?v=1.0.5"></script>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content" id="app">
@@ -47,28 +47,32 @@
             el: "#app",
             data: {
                 status: -1,
-                index:0
+                index:0,
+                showLayerButton:true,//控制弹出层的按钮{保存，关闭}
             },
             methods: {
                 recover: function (val) {
                     setStatus(this,val)
                 },
                 modify: function (flag) {
-                    var url = "../Admin/checks/addCheck.html?";
+                    var url = "addSpecification.html?";
+                    var title="";
                     if(flag==0){//新增
                         url+= "id=0";
+                        title="新增";
                     }else{//修改
                         if(checkIsSelection()){return};
                         if(checkIsSelectionOne()){return};//用于只判断一条记录
                         url+= "id="+getRecordIDForFastJson($('#exampleTableEvents'));
+                        title="修改";
                     }
-                    modifyShow(this,url,"100%","100%","Check");
+                    modifyShow(this,url,"80%","80%",title);
                 },
                  view:function(row, tr, field){//慧姐提供
-                    var url = "../Admin/checks/addCheck.html?";
+                    var url = "addSpecification.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
-                    modifyShow(this,url,"100%","100%","Check");
+                    modifyShow(this,url,"80%","80%","查看");
                 }
             },
             mounted: function () {
@@ -80,7 +84,7 @@
         })
         /** 固定写法 by majian*/
         function setStatus(that,status) {
-            setAdminStatus(that,status,"../Check/setCheckStatus")
+            setAdminStatus(that,status,basePath+"Specification/setSpecificationStatus")
         }
         /** 初始化表格*/
         (function(document, window, $) {
@@ -91,20 +95,15 @@
                         field: 'state',
                         checkbox:true
                     },
-                    {
-                        title: '编号',
+			        {
+                        title: '规格',
                         align: 'center',
-                        field: 'iD',
+                        field: 'specs',
                     },
-                    {
-                        title: '创建时间',
+			        {
+                        title: '商品编号',
                         align: 'center',
-                        field: 'createTime',
-                    },
-                    {
-                        title: '修改时间',
-                        align: 'center',
-                        field: 'modifyTime',
+                        field: 'shopID',
                     },
                     {
                         title: getChangHead("类型","status",[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]),
@@ -115,7 +114,7 @@
                         }
                     },
                 ];
-                getDataTable($('#exampleTableEvents'),"../Check/queryCheckPage",columns,queryParams,true,tempApp);
+                getDataTable($('#exampleTableEvents'),basePath+"Specification/querySpecificationPage",columns,queryParams,true,tempApp);
             })();
             function queryParams(params) {
                 var temp={}

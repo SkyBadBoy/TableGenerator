@@ -2,7 +2,7 @@
 package com.code.dao.write;
 import java.util.*;
 import com.code.config.mybatis.MyMapper;
-import com.code.domain.Check;
+import com.code.domain.Specification;
 
 /**
  * <p> Mapper Class</p>
@@ -10,6 +10,6 @@ import com.code.domain.Check;
  * @author majian
  * 
  */
-public interface CheckMapper extends MyMapper<Check>{
+public interface SpecificationMapper extends MyMapper<Specification>{
 
 }

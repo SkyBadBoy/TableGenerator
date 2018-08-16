@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.dao.write.ShopMapper">
+	<sql id="sql">
+		Shop_ID,Shop_CreateTime,Shop_ModifyTime,Shop_Status,Shop_Name,Shop_Memo,Shop_ClassifyName,Shop_ClassifyID,Shop_TagName,Shop_TagID,Shop_BrandName,Shop_BrandID,Shop_UnitName,Shop_UnitID,Shop_Content,Shop_Putaway,Shop_Images,Shop_Order,Shop_NO,Shop_NNum
+	</sql>
+	<sql id="where">
+		1=1 
+		<if test="ID!=null">
+				 and Shop_ID = #{ID}
+</if>
+<if test="CreateTime!=null">
+				 and Shop_CreateTime = #{CreateTime}
+</if>
+<if test="ModifyTime!=null">
+				 and Shop_ModifyTime = #{ModifyTime}
+</if>
+<if test="Status!=null">
+				 and Shop_Status = #{Status}
+</if>
+<if test="Name!=null">
+				 and Shop_Name = #{Name}
+</if>
+<if test="Memo!=null">
+				 and Shop_Memo = #{Memo}
+</if>
+<if test="ClassifyName!=null">
+				 and Shop_ClassifyName = #{ClassifyName}
+</if>
+<if test="ClassifyID!=null">
+				 and Shop_ClassifyID = #{ClassifyID}
+</if>
+<if test="TagName!=null">
+				 and Shop_TagName = #{TagName}
+</if>
+<if test="TagID!=null">
+				 and Shop_TagID = #{TagID}
+</if>
+<if test="BrandName!=null">
+				 and Shop_BrandName = #{BrandName}
+</if>
+<if test="BrandID!=null">
+				 and Shop_BrandID = #{BrandID}
+</if>
+<if test="UnitName!=null">
+				 and Shop_UnitName = #{UnitName}
+</if>
+<if test="UnitID!=null">
+				 and Shop_UnitID = #{UnitID}
+</if>
+<if test="Content!=null">
+				 and Shop_Content = #{Content}
+</if>
+<if test="Putaway!=null">
+				 and Shop_Putaway = #{Putaway}
+</if>
+<if test="Images!=null">
+				 and Shop_Images = #{Images}
+</if>
+<if test="Order!=null">
+				 and Shop_Order = #{Order}
+</if>
+<if test="NO!=null">
+				 and Shop_NO = #{NO}
+</if>
+<if test="NNum!=null">
+				 and Shop_NNum = #{NNum}
+</if>
+
+	</sql>
+
+	<!-- 插入数据 -->
+	<insert id="insert" parameterType="com.code.domain.Shop"  useGeneratedKeys="true">
+		insert into t_shop( <include refid="sql"></include> )
+		values(
+				#{ID},
+now(),
+now(),
+#{Status},
+#{Name},
+#{Memo},
+#{ClassifyName},
+#{ClassifyID},
+#{TagName},
+#{TagID},
+#{BrandName},
+#{BrandID},
+#{UnitName},
+#{UnitID},
+#{Content},
+#{Putaway},
+#{Images},
+#{Order},
+#{NO},
+#{NNum}
+				)
+	</insert>
+	<update id="update" parameterType="com.code.domain.Shop">
+		update t_shop set
+		 Shop_ModifyTime=now
+		 <if test="Status!=null">,Shop_Status = #{Status}</if>
+<if test="Name!=null">,Shop_Name = #{Name}</if>
+<if test="Memo!=null">,Shop_Memo = #{Memo}</if>
+<if test="ClassifyName!=null">,Shop_ClassifyName = #{ClassifyName}</if>
+<if test="ClassifyID!=null">,Shop_ClassifyID = #{ClassifyID}</if>
+<if test="TagName!=null">,Shop_TagName = #{TagName}</if>
+<if test="TagID!=null">,Shop_TagID = #{TagID}</if>
+<if test="BrandName!=null">,Shop_BrandName = #{BrandName}</if>
+<if test="BrandID!=null">,Shop_BrandID = #{BrandID}</if>
+<if test="UnitName!=null">,Shop_UnitName = #{UnitName}</if>
+<if test="UnitID!=null">,Shop_UnitID = #{UnitID}</if>
+<if test="Content!=null">,Shop_Content = #{Content}</if>
+<if test="Putaway!=null">,Shop_Putaway = #{Putaway}</if>
+<if test="Images!=null">,Shop_Images = #{Images}</if>
+<if test="Order!=null">,Shop_Order = #{Order}</if>
+<if test="NO!=null">,Shop_NO = #{NO}</if>
+<if test="NNum!=null">,Shop_NNum = #{NNum}</if>
+
+		<where>
+			Shop_ID= #{ID} 
+		</where>
+	</update>
+
+
+	<!-- 根据编号删除-->
+	<update id="deleteById" parameterType="com.code.domain.Shop">
+		update t_shop set Shop_Status=88 where Shop_ID = #{_parameter} 
+	</update>
+
+	<!-- 根据编号恢复-->
+	<update id="recoverByID" parameterType="com.code.domain.Shop">
+		update t_shop set Shop_Status=1 where Shop_ID = #{_parameter} 
+	</update>
+
+	<!-- 根据条件删除-->
+	<update id="deleteByCondition" parameterType="com.code.domain.Shop">
+		update t_shop set Shop_Status=88 
+		<where>
+			<include refid="where"></include>
+		</where>
+	</update>
+
+	<!-- 根据条件恢复-->
+	<update id="recoverByCondition" parameterType="com.code.domain.Shop">
+		update t_shop set Shop_Status=1 
+		<where>
+			<include refid="where"></include>
+		</where>
+	</update>
+
+
+</mapper>

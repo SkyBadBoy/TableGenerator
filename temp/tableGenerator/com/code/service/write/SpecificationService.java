@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
-import com.code.domain.Warehouse;
-import com.code.dao.read.ReadWarehouseMapper;
-import com.code.dao.write.WarehouseMapper;
+import com.code.domain.Specification;
+import com.code.dao.read.ReadSpecificationMapper;
+import com.code.dao.write.SpecificationMapper;
 
 /**
  * <p>Service class。</p>
@@ -22,52 +22,52 @@ import com.code.dao.write.WarehouseMapper;
  * @version 1.00
  */
 @Service
-@CacheConfig(cacheNames="WarehouseCache") 
+@CacheConfig(cacheNames="SpecificationCache") 
 @Transactional(propagation=Propagation.REQUIRED,readOnly=false,rollbackFor=Exception.class)
-public class WarehouseService {
+public class SpecificationService {
 
    
     @Autowired
-	private WarehouseMapper WriteMapper;
+	private SpecificationMapper WriteMapper;
 
     @Autowired
-	private ReadWarehouseMapper ReadMapper;
+	private ReadSpecificationMapper ReadMapper;
  
 
-	@CachePut(key="'Warehouse_'+#p0.ID")  
-	@CacheEvict(value = "ReadWarehouseCache",allEntries = true)
-	public Warehouse insert(Warehouse obj){
+	@CachePut(key="'Specification_'+#p0.ID")  
+	@CacheEvict(value = "ReadSpecificationCache",allEntries = true)
+	public Specification insert(Specification obj){
 		WriteMapper.insert(obj);
 		return ReadMapper.findById(obj.getID());
 	}
 
-	@CachePut(key="'Warehouse_'+#p0.ID")  
-	@CacheEvict(value = "ReadWarehouseCache",allEntries = true)
-	public Warehouse update(Warehouse obj){
+	@CachePut(key="'Specification_'+#p0.ID")  
+	@CacheEvict(value = "ReadSpecificationCache",allEntries = true)
+	public Specification update(Specification obj){
 		WriteMapper.update(obj);
 		return ReadMapper.findById(obj.getID());
 	}
 
-	@CachePut(key="'Warehouse_'+#p0")  
-	@CacheEvict(value = "ReadWarehouseCache",allEntries = true)
-	public Warehouse deleteById(String id){
+	@CachePut(key="'Specification_'+#p0")  
+	@CacheEvict(value = "ReadSpecificationCache",allEntries = true)
+	public Specification deleteById(String id){
 		WriteMapper.deleteById(id);
 		return ReadMapper.findById(id);
 	}
 
-	@CachePut(key="'Warehouse_'+#p0")  
-	@CacheEvict(value = "ReadWarehouseCache",allEntries = true)
-	public Warehouse recoverByID(String id){
+	@CachePut(key="'Specification_'+#p0")  
+	@CacheEvict(value = "ReadSpecificationCache",allEntries = true)
+	public Specification recoverByID(String id){
 		WriteMapper.recoverByID(id);
 		return ReadMapper.findById(id);
 	}
 
-	@CacheEvict(value = {"ReadWarehouseCache","WarehouseCache"},allEntries = true)
+	@CacheEvict(value = {"ReadSpecificationCache","SpecificationCache"},allEntries = true)
 	public int deleteByCondition(Map<String,Object> queryMap){
 		return WriteMapper.deleteByCondition(queryMap);
 	}
 
-	@CacheEvict(value = {"ReadWarehouseCache","WarehouseCache"},allEntries = true)
+	@CacheEvict(value = {"ReadSpecificationCache","SpecificationCache"},allEntries = true)
 	public int recoverByCondition(Map<String,Object> queryMap){
 		return WriteMapper.recoverByCondition(queryMap);
 	}

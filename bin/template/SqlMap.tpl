@@ -19,7 +19,7 @@
 	</insert>
 	<update id="update" parameterType="${package}.${tblName?cap_first}">
 		update ${tblNameSql} set
-		 ${tblName?cap_first}_ModifyTime=now
+		 ${tblName?cap_first}_ModifyTime=now()
 		 ${updateSql}
 		<where>
 			${conditionID} 

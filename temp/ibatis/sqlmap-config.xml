@@ -9,7 +9,9 @@
     <settings useStatementNamespaces="true" />
 
     <sqlMap
-		resource="com/code/dao/WarehouseMapper.xml" />
+		resource="com/code/dao/SpecificationMapper.xml" />
+    <sqlMap
+		resource="com/code/dao/ShopMapper.xml" />
 
 </sqlMapConfig>
 <!-- ======================================================================================== -->

@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
-import com.code.domain.Check;
-import com.code.dao.read.ReadCheckMapper;
-import com.code.dao.write.CheckMapper;
+import com.code.domain.Shop;
+import com.code.dao.read.ReadShopMapper;
+import com.code.dao.write.ShopMapper;
 
 /**
  * <p>Service class。</p>
@@ -22,52 +22,52 @@ import com.code.dao.write.CheckMapper;
  * @version 1.00
  */
 @Service
-@CacheConfig(cacheNames="CheckCache") 
+@CacheConfig(cacheNames="ShopCache") 
 @Transactional(propagation=Propagation.REQUIRED,readOnly=false,rollbackFor=Exception.class)
-public class CheckService {
+public class ShopService {
 
    
     @Autowired
-	private CheckMapper WriteMapper;
+	private ShopMapper WriteMapper;
 
     @Autowired
-	private ReadCheckMapper ReadMapper;
+	private ReadShopMapper ReadMapper;
  
 
-	@CachePut(key="'Check_'+#p0.ID")  
-	@CacheEvict(value = "ReadCheckCache",allEntries = true)
-	public Check insert(Check obj){
+	@CachePut(key="'Shop_'+#p0.ID")  
+	@CacheEvict(value = "ReadShopCache",allEntries = true)
+	public Shop insert(Shop obj){
 		WriteMapper.insert(obj);
 		return ReadMapper.findById(obj.getID());
 	}
 
-	@CachePut(key="'Check_'+#p0.ID")  
-	@CacheEvict(value = "ReadCheckCache",allEntries = true)
-	public Check update(Check obj){
+	@CachePut(key="'Shop_'+#p0.ID")  
+	@CacheEvict(value = "ReadShopCache",allEntries = true)
+	public Shop update(Shop obj){
 		WriteMapper.update(obj);
 		return ReadMapper.findById(obj.getID());
 	}
 
-	@CachePut(key="'Check_'+#p0")  
-	@CacheEvict(value = "ReadCheckCache",allEntries = true)
-	public Check deleteById(String id){
+	@CachePut(key="'Shop_'+#p0")  
+	@CacheEvict(value = "ReadShopCache",allEntries = true)
+	public Shop deleteById(String id){
 		WriteMapper.deleteById(id);
 		return ReadMapper.findById(id);
 	}
 
-	@CachePut(key="'Check_'+#p0")  
-	@CacheEvict(value = "ReadCheckCache",allEntries = true)
-	public Check recoverByID(String id){
+	@CachePut(key="'Shop_'+#p0")  
+	@CacheEvict(value = "ReadShopCache",allEntries = true)
+	public Shop recoverByID(String id){
 		WriteMapper.recoverByID(id);
 		return ReadMapper.findById(id);
 	}
 
-	@CacheEvict(value = {"ReadCheckCache","CheckCache"},allEntries = true)
+	@CacheEvict(value = {"ReadShopCache","ShopCache"},allEntries = true)
 	public int deleteByCondition(Map<String,Object> queryMap){
 		return WriteMapper.deleteByCondition(queryMap);
 	}
 
-	@CacheEvict(value = {"ReadCheckCache","CheckCache"},allEntries = true)
+	@CacheEvict(value = {"ReadShopCache","ShopCache"},allEntries = true)
 	public int recoverByCondition(Map<String,Object> queryMap){
 		return WriteMapper.recoverByCondition(queryMap);
 	}

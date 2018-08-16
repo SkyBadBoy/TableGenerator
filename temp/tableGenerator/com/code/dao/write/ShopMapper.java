@@ -2,7 +2,7 @@
 package com.code.dao.write;
 import java.util.*;
 import com.code.config.mybatis.MyMapper;
-import com.code.domain.Warehouse;
+import com.code.domain.Shop;
 
 /**
  * <p> Mapper Class</p>
@@ -10,6 +10,6 @@ import com.code.domain.Warehouse;
  * @author majian
  * 
  */
-public interface WarehouseMapper extends MyMapper<Warehouse>{
+public interface ShopMapper extends MyMapper<Shop>{
 
 }

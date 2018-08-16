@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/web/include.js?v=1.0.5"></script>
+    <script src="../js/web/include.js?v=1.0.5"></script>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content" id="app">
@@ -26,37 +26,9 @@
                             </div>
 							    <div class="hr-line-dashed" ></div>
 	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="adminID"></label>
+	                                <label class="col-sm-2 control-label" v-text="specs"></label>
 	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.adminID" class="form-control"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="administrator"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.administrator" class="form-control"  maxlength="20"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="warehouseID"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.warehouseID" class="form-control"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="name"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.name" class="form-control"  maxlength="50"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="time"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.time" class="form-control"  >
+	                                    <input type="text" v-model="data.specs" class="form-control"  maxlength="20"  >
 	                            </div>
                             </div>
 							    <div class="hr-line-dashed" ></div>
@@ -68,30 +40,16 @@
                             </div>
 							    <div class="hr-line-dashed" ></div>
 	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="storeID"></label>
+	                                <label class="col-sm-2 control-label" v-text="shopID"></label>
 	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.storeID" class="form-control"  >
+	                                    <input type="text" v-model="data.shopID" class="form-control"  >
 	                            </div>
                             </div>
 							    <div class="hr-line-dashed" ></div>
 	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="adjustStatus"></label>
+	                                <label class="col-sm-2 control-label" v-text="image"></label>
 	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.adjustStatus" class="form-control"  maxlength="1"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="operator"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.operator" class="form-control"  maxlength="20"  >
-	                            </div>
-                            </div>
-							    <div class="hr-line-dashed" ></div>
-	                            <div class="form-group">
-	                                <label class="col-sm-2 control-label" v-text="updater"></label>
-	                                <div class="col-sm-10">
-	                                    <input type="text" v-model="data.updater" class="form-control"  maxlength="20"  >
+	                                    <input type="text" v-model="data.image" class="form-control"  maxlength="255"  >
 	                            </div>
                             </div>
                           
@@ -116,29 +74,17 @@
             data: {
                  viewflag:getUrlKey("viewflag")=="1"?false:true,//查看标志
                     status:"状态 【正常：1   删除：88】",
-                    adminID:"仓库管理员",
-                    administrator:"管理员(冗余字段)",
-                    warehouseID:"仓库手机(冗余字段)",
-                    name:"仓库名字",
-                    time:"盘点时间",
+                    specs:"规格",
                     memo:"备注",
-                    storeID:"盘点",
-                    adjustStatus:"是否调整 0 否  1 是",
-                    operator:"操作人",
-                    updater:"更新人",
+                    shopID:"商品编号",
+                    image:"主图",
                 data:{
                     iD:getUrlKey("id"),
                     	status:0,
-                    	adminID:0,
-                    	administrator:0,
-                    	warehouseID:0,
-                    	name:0,
-                    	time:0,
+                    	specs:0,
                     	memo:0,
-                    	storeID:0,
-                    	adjustStatus:0,
-                    	operator:0,
-                    	updater:0,
+                    	shopID:0,
+                    	image:0,
                 }
             },
             methods: {
@@ -150,13 +96,13 @@
                 },
                 save: function () {
                     if(validate()){return};
-                    savaData(this,"../Check/modifyCheck")
+                    savaData(this,basePath+"Specification/modifySpecification")
                 }
             },
             mounted: function () {
                 tempApp=this;
                 if(this.data.iD!=0){
-                    findByID(this,this.data.iD,"../Check/findCheck/")
+                    findByID(this,this.data.iD,basePath+"Specification/findSpecification/")
                 }
                 bindImgError();
                 this.initDocument();
@@ -165,8 +111,12 @@
     }
     function validate(){
         var message="不允许为空。"
-        if(!chechIsUnll(tempApp.data.adjustStatus)){
-            error(tempApp.adjustStatus+message);
+        if(!chechIsUnll(tempApp.data.specs)){
+            error(tempApp.specs+message);
+            return true;
+        }
+        if(!chechIsUnll(tempApp.data.shopID)){
+            error(tempApp.shopID+message);
             return true;
         }
         return false;

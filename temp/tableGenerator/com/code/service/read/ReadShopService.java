@@ -15,8 +15,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.code.domain.Warehouse;
-import com.code.dao.read.ReadWarehouseMapper;
+import com.code.domain.Shop;
+import com.code.dao.read.ReadShopMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -28,20 +28,20 @@ import java.util.Map;
  * @version 1.00
  */
  @Service
- @CacheConfig(cacheNames="ReadWarehouseCache") 
+ @CacheConfig(cacheNames="ReadShopCache") 
  @Transactional(propagation=Propagation.REQUIRED,readOnly=false,rollbackFor=Exception.class)
-public class ReadWarehouseService {
+public class ReadShopService {
 
     @Autowired
-	private ReadWarehouseMapper ReadMapper;
+	private ReadShopMapper ReadMapper;
 
-	@Cacheable(value = "WarehouseCache",key="'Warehouse_'+#p0") 
-	public Warehouse findById(String id){
+	@Cacheable(value = "ShopCache",key="'Shop_'+#p0") 
+	public Shop findById(String id){
 		return ReadMapper.findById(id);
 	}
 
 	@Cacheable(keyGenerator = "keyGenerator")
-	public List<Warehouse> query(Map<String,Object> queryMap){
+	public List<Shop> query(Map<String,Object> queryMap){
 		return ReadMapper.query(queryMap);
 	}
 
@@ -51,12 +51,12 @@ public class ReadWarehouseService {
 	}
 
 	@Cacheable(keyGenerator = "keyGenerator")
-	public PageInfo<Warehouse> queryPage(Map<String,Object> queryMap, int pageNum, int pageSize){
-		Page<Warehouse> page = PageHelper.startPage(pageNum, pageSize);
+	public PageInfo<Shop> queryPage(Map<String,Object> queryMap, int pageNum, int pageSize){
+		Page<Shop> page = PageHelper.startPage(pageNum, pageSize);
 		if(pageSize==0){//当pageSize=0时查询全部的东西
 			page.setPageSizeZero(true);
 		}
-		page.setOrderBy("Warehouse_CreateTime desc");
+		page.setOrderBy("Shop_CreateTime desc");
 		ReadMapper.query(queryMap);
 		return page.toPageInfo();
 	}

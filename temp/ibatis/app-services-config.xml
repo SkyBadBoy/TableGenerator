@@ -10,24 +10,40 @@
 
 	<!-- Service -->
 	<!-- ======================================================================================== -->
-		<bean id="com.code.service.master.TwarehouseServiceImpl" class="com.code.service.master.TwarehouseServiceImpl">
+		<bean id="com.code.service.master.TspecificationServiceImpl" class="com.code.service.master.TspecificationServiceImpl">
 		<flex:remoting-destination />
-		<property name="dao"><ref bean="com.code.dao.master.TwarehouseDao"/></property>
+		<property name="dao"><ref bean="com.code.dao.master.TspecificationDao"/></property>
+	</bean>
+	<bean id="com.code.service.master.TshopServiceImpl" class="com.code.service.master.TshopServiceImpl">
+		<flex:remoting-destination />
+		<property name="dao"><ref bean="com.code.dao.master.TshopDao"/></property>
 	</bean>
 	<!-- ============== -->
 	<!-- ======================================================================================== -->
 
 	<!-- DAO -->
 	<!-- ======================================================================================== -->
-	<bean id="com.code.dao.master.TwarehouseDao" class="org.springframework.aop.framework.ProxyFactoryBean" >
+	<bean id="com.code.dao.master.TspecificationDao" class="org.springframework.aop.framework.ProxyFactoryBean" >
         <property name="proxyInterfaces">
             <value>com.base.dao.DaoIf</value>
         </property>
         <property name="target">
-            <ref local="com.code.dao.master.TwarehouseDaoImpl"/>
+            <ref local="com.code.dao.master.TspecificationDaoImpl"/>
         </property>
     </bean>
-    <bean id="com.code.dao.master.TwarehouseDaoImpl" class="com.code.dao.master.TwarehouseDaoImpl">
+    <bean id="com.code.dao.master.TspecificationDaoImpl" class="com.code.dao.master.TspecificationDaoImpl">
+        <property name="sqlMapClient"><ref bean="sqlMapClient"/></property>
+        <property name="dataSource"><ref bean="dataSource"/></property>
+    </bean>
+	<bean id="com.code.dao.master.TshopDao" class="org.springframework.aop.framework.ProxyFactoryBean" >
+        <property name="proxyInterfaces">
+            <value>com.base.dao.DaoIf</value>
+        </property>
+        <property name="target">
+            <ref local="com.code.dao.master.TshopDaoImpl"/>
+        </property>
+    </bean>
+    <bean id="com.code.dao.master.TshopDaoImpl" class="com.code.dao.master.TshopDaoImpl">
         <property name="sqlMapClient"><ref bean="sqlMapClient"/></property>
         <property name="dataSource"><ref bean="dataSource"/></property>
     </bean>

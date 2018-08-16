@@ -15,8 +15,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.code.domain.Check;
-import com.code.dao.read.ReadCheckMapper;
+import com.code.domain.Specification;
+import com.code.dao.read.ReadSpecificationMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -28,20 +28,20 @@ import java.util.Map;
  * @version 1.00
  */
  @Service
- @CacheConfig(cacheNames="ReadCheckCache") 
+ @CacheConfig(cacheNames="ReadSpecificationCache") 
  @Transactional(propagation=Propagation.REQUIRED,readOnly=false,rollbackFor=Exception.class)
-public class ReadCheckService {
+public class ReadSpecificationService {
 
     @Autowired
-	private ReadCheckMapper ReadMapper;
+	private ReadSpecificationMapper ReadMapper;
 
-	@Cacheable(value = "CheckCache",key="'Check_'+#p0") 
-	public Check findById(String id){
+	@Cacheable(value = "SpecificationCache",key="'Specification_'+#p0") 
+	public Specification findById(String id){
 		return ReadMapper.findById(id);
 	}
 
 	@Cacheable(keyGenerator = "keyGenerator")
-	public List<Check> query(Map<String,Object> queryMap){
+	public List<Specification> query(Map<String,Object> queryMap){
 		return ReadMapper.query(queryMap);
 	}
 
@@ -51,12 +51,12 @@ public class ReadCheckService {
 	}
 
 	@Cacheable(keyGenerator = "keyGenerator")
-	public PageInfo<Check> queryPage(Map<String,Object> queryMap, int pageNum, int pageSize){
-		Page<Check> page = PageHelper.startPage(pageNum, pageSize);
+	public PageInfo<Specification> queryPage(Map<String,Object> queryMap, int pageNum, int pageSize){
+		Page<Specification> page = PageHelper.startPage(pageNum, pageSize);
 		if(pageSize==0){//当pageSize=0时查询全部的东西
 			page.setPageSizeZero(true);
 		}
-		page.setOrderBy("Check_CreateTime desc");
+		page.setOrderBy("Specification_CreateTime desc");
 		ReadMapper.query(queryMap);
 		return page.toPageInfo();
 	}

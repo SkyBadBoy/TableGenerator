@@ -2,7 +2,7 @@
 package com.code.dao.read;
 import java.util.*;
 import com.code.config.mybatis.ReadMapper;
-import com.code.domain.Warehouse;
+import com.code.domain.Specification;
 import java.util.List;
 
 /**
@@ -11,6 +11,6 @@ import java.util.List;
  * @author majian
  * 
  */
-public interface ReadWarehouseMapper extends ReadMapper<Warehouse>{
+public interface ReadSpecificationMapper extends ReadMapper<Specification>{
 
 }
