@@ -56,20 +56,23 @@
                 },
                 modify: function (flag) {
                     var url = "add${classdef}.html?";
+                    var title="";
                     if(flag==0){//新增
                         url+= "id=0";
+                        title="新增";
                     }else{//修改
                         if(checkIsSelection()){return};
                         if(checkIsSelectionOne()){return};//用于只判断一条记录
                         url+= "id="+getRecordIDForFastJson($('#exampleTableEvents'));
+                        title="修改";
                     }
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%",title);
                 },
                  view:function(row, tr, field){//慧姐提供
                     var url = "add${classdef}.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%","查看");
                 }
             },
             mounted: function () {

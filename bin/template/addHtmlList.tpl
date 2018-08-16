@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/web/include.js?v=1.0.5"></script>
+    <script src="../js/web/include.js?v=1.0.5"></script>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content" id="app">
@@ -66,13 +66,13 @@
                 },
                 save: function () {
                     if(validate()){return};
-                    savaData(this,"../${classdef}/modify${classdef}")
+                    savaData(this,basePath+"${classdef}/modify${classdef}")
                 }
             },
             mounted: function () {
                 tempApp=this;
                 if(this.data.iD!=0){
-                    findByID(this,this.data.iD,"../${classdef}/find${classdef}/")
+                    findByID(this,this.data.iD,basePath+"${classdef}/find${classdef}/")
                 }
                 bindImgError();
                 this.initDocument();

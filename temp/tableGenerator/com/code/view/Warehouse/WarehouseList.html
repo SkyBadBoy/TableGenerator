@@ -55,7 +55,7 @@
                     setStatus(this,val)
                 },
                 modify: function (flag) {
-                    var url = "add${classdef}.html?";
+                    var url = "addWarehouse.html?";
                     if(flag==0){//新增
                         url+= "id=0";
                     }else{//修改
@@ -63,13 +63,13 @@
                         if(checkIsSelectionOne()){return};//用于只判断一条记录
                         url+= "id="+getRecordIDForFastJson($('#exampleTableEvents'));
                     }
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%","Warehouse");
                 },
                  view:function(row, tr, field){//慧姐提供
-                    var url = "add${classdef}.html?";
+                    var url = "addWarehouse.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%","Warehouse");
                 }
             },
             mounted: function () {
@@ -81,7 +81,7 @@
         })
         /** 固定写法 by majian*/
         function setStatus(that,status) {
-            setAdminStatus(that,status,basePath+"${classdef}/set${classdef}Status")
+            setAdminStatus(that,status,basePath+"Warehouse/setWarehouseStatus")
         }
         /** 初始化表格*/
         (function(document, window, $) {
@@ -92,15 +92,16 @@
                         field: 'state',
                         checkbox:true
                     },
-                    <#list fieldList as field>
-			        <#if field.nullAble == false>
 			        {
-                        title: '${field.comment}',
+                        title: '仓库名称',
                         align: 'center',
-                        field: '${field.xame}',
+                        field: 'name',
                     },
-			        </#if>
-			        </#list>
+			        {
+                        title: '仓库编码',
+                        align: 'center',
+                        field: 'code',
+                    },
                     {
                         title: getChangHead("类型","status",[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]),
                         align: 'center',
@@ -110,7 +111,7 @@
                         }
                     },
                 ];
-                getDataTable($('#exampleTableEvents'),basePath+"${classdef}/query${classdef}Page",columns,queryParams,true,tempApp);
+                getDataTable($('#exampleTableEvents'),basePath+"Warehouse/queryWarehousePage",columns,queryParams,true,tempApp);
             })();
             function queryParams(params) {
                 var temp={}
