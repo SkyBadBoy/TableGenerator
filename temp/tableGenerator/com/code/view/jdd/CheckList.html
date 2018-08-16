@@ -47,15 +47,14 @@
             el: "#app",
             data: {
                 status: -1,
-                index:0,
-                showLayerButton:true,//控制弹出层的按钮{保存，关闭}
+                index:0
             },
             methods: {
                 recover: function (val) {
                     setStatus(this,val)
                 },
                 modify: function (flag) {
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "../Admin/jdd/addCheck.html?";
                     if(flag==0){//新增
                         url+= "id=0";
                     }else{//修改
@@ -63,13 +62,13 @@
                         if(checkIsSelectionOne()){return};//用于只判断一条记录
                         url+= "id="+getRecordIDForFastJson($('#exampleTableEvents'));
                     }
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%","Check",true);
                 },
                  view:function(row, tr, field){//慧姐提供
-                    var url = "../Admin/${viewPathName}/add${classdef}.html?";
+                    var url = "../Admin/jdd/addCheck.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
-                    modifyShow(this,url,"80%","80%","${classdef}");
+                    modifyShow(this,url,"80%","80%","Check",true);
                 }
             },
             mounted: function () {
@@ -81,7 +80,7 @@
         })
         /** 固定写法 by majian*/
         function setStatus(that,status) {
-            setAdminStatus(that,status,"../${classdef}/set${classdef}Status")
+            setAdminStatus(that,status,"../Check/setCheckStatus")
         }
         /** 初始化表格*/
         (function(document, window, $) {
@@ -101,13 +100,11 @@
                         title: '创建时间',
                         align: 'center',
                         field: 'createTime',
-                        formatter: timeFormatter19
                     },
                     {
                         title: '修改时间',
                         align: 'center',
                         field: 'modifyTime',
-                        formatter: timeFormatter19
                     },
                     {
                         title: getChangHead("类型","status",[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]),
@@ -118,7 +115,7 @@
                         }
                     },
                 ];
-                getDataTable($('#exampleTableEvents'),"../${classdef}/query${classdef}Page",columns,queryParams,true,tempApp);
+                getDataTable($('#exampleTableEvents'),"../Check/queryCheckPage",columns,queryParams,true,tempApp);
             })();
             function queryParams(params) {
                 var temp={}

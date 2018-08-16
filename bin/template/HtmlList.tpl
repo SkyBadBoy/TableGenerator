@@ -62,13 +62,13 @@
                         if(checkIsSelectionOne()){return};//用于只判断一条记录
                         url+= "id="+getRecordIDForFastJson($('#exampleTableEvents'));
                     }
-                    modifyShow(this,url,"80%","80%","${classdef}",true);
+                    modifyShow(this,url,"80%","80%","${classdef}");
                 },
                  view:function(row, tr, field){//慧姐提供
                     var url = "../Admin/${viewPathName}/add${classdef}.html?";
                     url+= "id="+row.iD;
                     url+= "&viewflag=1";//查看标志，页面全部设置成只读
-                    modifyShow(this,url,"80%","80%","${classdef}",true);
+                    modifyShow(this,url,"80%","80%","${classdef}");
                 }
             },
             mounted: function () {
@@ -100,11 +100,13 @@
                         title: '创建时间',
                         align: 'center',
                         field: 'createTime',
+                        formatter: timeFormatter19
                     },
                     {
                         title: '修改时间',
                         align: 'center',
                         field: 'modifyTime',
+                        formatter: timeFormatter19
                     },
                     {
                         title: getChangHead("类型","status",[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]),
