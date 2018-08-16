@@ -115,6 +115,9 @@ public class HtmlListGenerator implements Globles {
             ddb.setMethodAppend(CommonUtil.getOutputColumnName(tableInfoBean
                 .getColumnName(), true));
             ddb.setComment(tableInfoBean.getComment());
+            ddb.setXame(CommonUtil.getXName(tableInfoBean.getColumnName()));
+            ddb.setCharOctetLength(tableInfoBean.getCharOctetLength());
+            ddb.setNullAble(tableInfoBean.isNullAble());
 
             fieldList.add(ddb);
             
