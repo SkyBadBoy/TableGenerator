@@ -86,32 +86,17 @@ public class ${classdef}Controller extends BaseController {
     public Map modify${classdef}(String data, HttpServletRequest request) {
         Map<String, Object> returnMap = new HashMap<>(2);
         ${classdef} temp = JSON.parseObject(data, ${classdef}.class);
-        ${classdef}  obj=new ${classdef}();
-        boolean isNew=false;
+        int flag=0;
         if("0".equals(temp.getID())){
-            isNew=true;
+            temp.setID(CommonUntil.getInstance().CreateNewID());
+            temp.setStatus(Integer.parseInt(CommonStatus.Status.Ectivity.getid()));
+            flag=${classdef}Service.insert(temp);
         }else{
-            obj=Read${classdef}Service.findById(String.valueOf(temp.getID()));
-            if(obj==null){
-                isNew=true;
-            }
+            flag=${classdef}Service.update(temp);
         }
 
-        <#list setFieldList as f>
-        obj.set${f.name}(temp.get${f.name}());
-        </#list>
-
-
-        ${classdef} tempObj=null;
-        if(isNew){
-            obj.setID(CommonUntil.getInstance().CreateNewID());
-            obj.setStatus(Integer.parseInt(CommonStatus.Status.Ectivity.getid()));
-            tempObj=${classdef}Service.insert(obj);
-        }else{
-            tempObj=${classdef}Service.update(obj);
-        }
-        returnMap.put("code", tempObj!=null?0:-1);
-        returnMap.put("message", tempObj!=null?"操作成功":"操作失败");
+        returnMap.put("code", flag!=0?0:-1);
+        returnMap.put("message", flag!=0?"操作成功":"操作失败");
         RabbitUtil.getInstance().OperationLog(request.getHeader("Token"),"修改【${classdef}-modify${classdef}-"+obj.getID()+"】内容",ReadOnlineService,OperationService,RabbitTemplate,ReadUserService);
         return returnMap;
     }
