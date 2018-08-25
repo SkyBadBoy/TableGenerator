@@ -3,10 +3,7 @@ package ${package}.write;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
@@ -30,7 +27,7 @@ public class ${classdef}Service {
 	private ${classdef}Mapper WriteMapper;
 
 	@CacheEvict(value = "Read${classdef}Cache",allEntries = true)
-	public ${classdef} insert(${classdef} obj){return WriteMapper.insert(obj);}
+	public int insert(${classdef} obj){return WriteMapper.insert(obj);}
 
 	@Caching(evict={@CacheEvict(value = "Read${classdef}Cache",allEntries = true),@CacheEvict(value = "${classdef}Cache",key="'${classdef}_'+#p0.ID")})
 	public int update(${classdef} obj){return WriteMapper.update(obj);}

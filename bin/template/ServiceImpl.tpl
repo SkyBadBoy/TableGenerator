@@ -3,22 +3,18 @@ package ${package}.write;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
 import ${entityImport};
-import com.code.dao.read.Read${classdef}Mapper;
 import com.code.dao.write.${classdef}Mapper;
 
 /**
  * <p>${tableComment}Service class。</p>
  *
- * @author majian 自动生成器
+ * @author yanghui majian 自动生成器
  * @version 1.00
  */
 @Service
@@ -30,37 +26,17 @@ public class ${classdef}Service {
     @Autowired
 	private ${classdef}Mapper WriteMapper;
 
-    @Autowired
-	private Read${classdef}Mapper ReadMapper;
- 
-
-	@CachePut(key="'${classdef}_'+#p0.ID")  
 	@CacheEvict(value = "Read${classdef}Cache",allEntries = true)
-	public ${classdef} insert(${classdef} obj){
-		WriteMapper.insert(obj);
-		return ReadMapper.findById(obj.getID());
-	}
+	public int insert(${classdef} obj){return WriteMapper.insert(obj);}
 
-	@CachePut(key="'${classdef}_'+#p0.ID")  
-	@CacheEvict(value = "Read${classdef}Cache",allEntries = true)
-	public ${classdef} update(${classdef} obj){
-		WriteMapper.update(obj);
-		return ReadMapper.findById(obj.getID());
-	}
+	@Caching(evict={@CacheEvict(value = "Read${classdef}Cache",allEntries = true),@CacheEvict(value = "${classdef}Cache",key="'${classdef}_'+#p0.ID")})
+	public int update(${classdef} obj){return WriteMapper.update(obj);}
 
-	@CachePut(key="'${classdef}_'+#p0")  
-	@CacheEvict(value = "Read${classdef}Cache",allEntries = true)
-	public ${classdef} deleteById(String id){
-		WriteMapper.deleteById(id);
-		return ReadMapper.findById(id);
-	}
+	@Caching(evict={@CacheEvict(value = "Read${classdef}Cache",allEntries = true),@CacheEvict(value = "${classdef}Cache",key="'${classdef}_'+#p0")})
+	public int deleteById(String id){return WriteMapper.deleteById(id);}
 
-	@CachePut(key="'${classdef}_'+#p0")  
-	@CacheEvict(value = "Read${classdef}Cache",allEntries = true)
-	public ${classdef} recoverByID(String id){
-		WriteMapper.recoverByID(id);
-		return ReadMapper.findById(id);
-	}
+	@Caching(evict={@CacheEvict(value = "Read${classdef}Cache",allEntries = true),@CacheEvict(value = "${classdef}Cache",key="'${classdef}_'+#p0")})
+	public int recoverByID(String id){return WriteMapper.recoverByID(id);}
 
 	@CacheEvict(value = {"Read${classdef}Cache","${classdef}Cache"},allEntries = true)
 	public int deleteByCondition(Map<String,Object> queryMap){

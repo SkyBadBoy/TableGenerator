@@ -97,7 +97,7 @@ public class ${classdef}Controller extends BaseController {
 
         returnMap.put("code", flag!=0?0:-1);
         returnMap.put("message", flag!=0?"操作成功":"操作失败");
-        RabbitUtil.getInstance().OperationLog(request.getHeader("Token"),"修改【${classdef}-modify${classdef}-"+obj.getID()+"】内容",ReadOnlineService,OperationService,RabbitTemplate,ReadUserService);
+        RabbitUtil.getInstance().OperationLog(request.getHeader("Token"),"修改【${classdef}-modify${classdef}-"+temp.getID()+"】内容",ReadOnlineService,OperationService,RabbitTemplate,ReadUserService);
         return returnMap;
     }
 

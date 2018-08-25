@@ -29,7 +29,6 @@ import java.util.Map;
  */
  @Service
  @CacheConfig(cacheNames="Read${classdef}Cache") 
- @Transactional(propagation=Propagation.REQUIRED,readOnly=false,rollbackFor=Exception.class)
 public class Read${classdef}Service {
 
     @Autowired
