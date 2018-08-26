@@ -16,7 +16,12 @@
                     <div class="example-wrap">
                         <h4 class="example-title"></h4>
                         <div class="example">
-                            <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                        	 <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                <button v-for="item in ButtonList" type="button"   :onclick="item.menu.url" :class="item.menu.color" >
+                                    <i :class="item.menu.logo" aria-hidden="true" v-text="item.menu.name"></i>
+                                </button>
+                            </div>
+                            <!-- <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
                                 <button type="button"   @click="modify(0)" class="btn btn-primary ">
                                     <i class="glyphicon glyphicon-plus" aria-hidden="true">新增</i>
                                 </button>
@@ -29,7 +34,7 @@
                                 <button type="button"  @click="recover(1)" class="btn btn-primary ">
                                     <i class="glyphicon glyphicon-play" aria-hidden="true">恢复</i>
                                 </button>
-                            </div>
+                            </div> -->
                             <table id="exampleTableEvents" >
                             </table>
                         </div>
@@ -49,6 +54,7 @@
                 status: -1,
                 index:0,
                 showLayerButton:true,//控制弹出层的按钮{保存，关闭}
+                ButtonList:[],
             },
             methods: {
                 recover: function (val) {
@@ -79,6 +85,7 @@
                 bindImgError();
                 initFancybox();
                 tempApp=this;
+                getButtonAll(this);
             }
 
         })

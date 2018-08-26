@@ -119,6 +119,15 @@
                             return headFormatter(value,[{"id":88,"title":"删除"},{"id":1,"title":"正常"}]);
                         }
                     },
+                    {
+                        title: "操作",
+                        align: 'center',
+                        field: 'iD',
+                        formatter: function(value){
+                            var content=[{i:"glyphicon glyphicon-pencil",click:"editOperation(this,80,80)",url:"../Admin/add${classdef}.html"},{i:"glyphicon glyphicon-trash",click:"setAdminStatusOperation(88,this)",url:'../${classdef}/set${classdef}Status'},{i:"glyphicon glyphicon-play",click:"setAdminStatusOperation(1,this)",url:'../${classdef}/set${classdef}Status'}];
+                            return operationFormatter(value,content);
+                        }
+                    },
                 ];
                 getDataTable($('#exampleTableEvents'),basePath+"${classdef}/query${classdef}Page",columns,queryParams,true,tempApp);
             })();
