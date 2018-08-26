@@ -123,8 +123,9 @@
                         title: "操作",
                         align: 'center',
                         field: 'iD',
+                        width: "80px",
                         formatter: function(value){
-                            var content=[{i:"glyphicon glyphicon-pencil",click:"editOperation(this,80,80)",url:"../Admin/add${classdef}.html"},{i:"glyphicon glyphicon-trash",click:"setAdminStatusOperation(88,this)",url:'../${classdef}/set${classdef}Status'},{i:"glyphicon glyphicon-play",click:"setAdminStatusOperation(1,this)",url:'../${classdef}/set${classdef}Status'}];
+                            var content=[{i:"glyphicon glyphicon-pencil",click:"editOperation(this,80,80)",url:"add${classdef}.html"},{i:"glyphicon glyphicon-trash",click:"setAdminStatusOperation(88,this)",url:'../${classdef}/set${classdef}Status'},{i:"glyphicon glyphicon-play",click:"setAdminStatusOperation(1,this)",url:'../${classdef}/set${classdef}Status'}];
                             return operationFormatter(value,content);
                         }
                     },
